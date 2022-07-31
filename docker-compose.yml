@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    command: python manage.py runserver 3000
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=monoluntik
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=test_project
+      - POSTGRES_HOST=localhost
+    ports:
+      - 5432:5432
+volumes:
+  postgres_data:

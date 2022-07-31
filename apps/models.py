@@ -20,7 +20,7 @@ class Student(models.Model):
     address = models.CharField(max_length=355)
     gendar = models.CharField(choices=GENDAR, max_length=255)
     group = models.ForeignKey(Class, related_name='class_student', on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Класс')
-
+    photo = models.ImageField(upload_to="media", blank=True, null=True)
     def __str__(self) -> str:
         return self.name
 
